@@ -9,8 +9,8 @@ unit tests.
 
 Conceitos abordados
 
-Injeção de dependência com CDI
-Injeção de logger com demoiselle
-Rodando os testes com DemoiselleRunner
-Utilizando as facilidade de configuração de aplicações fornecidas pelo demoiselle
+* Injeção de dependência com CDI
+* Injeção de logger com demoiselle
+* Rodando os testes com DemoiselleRunner
+* Utilizando as facilidade de configuração de aplicações fornecidas pelo demoiselle
 
