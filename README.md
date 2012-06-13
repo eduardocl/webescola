@@ -9,8 +9,6 @@ unit tests.
 
 Conceitos abordados
 
-* Injeção de dependência com CDI
-* Injeção de logger com demoiselle
-* Rodando os testes com DemoiselleRunner
-* Utilizando as facilidade de configuração de aplicações fornecidas pelo demoiselle
+* Tratamento de exceções com demoiselle, anotações: @Controller, @ExceptionHander e @ApplicationException
+* Resource Bundles.
 
