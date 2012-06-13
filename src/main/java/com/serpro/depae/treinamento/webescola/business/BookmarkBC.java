@@ -1,10 +1,15 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+
 import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 
+import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
 import com.serpro.depae.treinamento.webescola.domain.Bookmark;
 import com.serpro.depae.treinamento.webescola.persistence.BookmarkDAO;
 
@@ -12,6 +17,11 @@ import com.serpro.depae.treinamento.webescola.persistence.BookmarkDAO;
 public class BookmarkBC extends DelegateCrud<Bookmark, Long, BookmarkDAO> {
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Logger logger;
+	
+	@Inject DisciplinasConfig config;
 	
 	@Startup
 	@Transactional
@@ -28,6 +38,11 @@ public class BookmarkBC extends DelegateCrud<Bookmark, Long, BookmarkDAO> {
 			insert(new Bookmark("Maven", "http://repository.frameworkdemoiselle.gov.br"));
 			insert(new Bookmark("Downloads", "http://download.frameworkdemoiselle.gov.br"));
 		}
+	}
+	
+	public void logSomething() {
+		logger.info("teste");
+		logger.info(config.getMaxAlunos().toString());
 	}
 	
 }

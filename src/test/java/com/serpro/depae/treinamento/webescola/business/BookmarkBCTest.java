@@ -74,4 +74,10 @@ public class BookmarkBCTest {
 		Bookmark bookmark3 = (Bookmark)listaBookmarks.get(0);
 		assertEquals("Demoiselle Portal alterado", bookmark3.getDescription());
 	}
+	
+	@Test
+	public void testLogSomething() {
+		bookmarkBC.logSomething();
+	}
+	
 }

@@ -1,25 +1,47 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
-import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
-public class Disciplina {
+import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
+import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
+
+public class Disciplina implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private DisciplinasConfig config;
+
+	@Inject Logger logger;
 	
-	@Id @GeneratedValue
-	private Long Id;
+	private List<String> alunos;
 
-	public Long getId() {
-		return Id;
+	public Disciplina() {
+		this.alunos = new ArrayList<String>();
 	}
 
-	public void setId(Long id) {
-		Id = id;
+	public boolean matricularAluno(String aluno) {
+		if (alunos.contains(aluno)) {
+			logger.info("Aluno " + aluno +" já está matriculado");
+			return false;
+		} else if(estaCheia()){ 
+			logger.info("A disciplina está lotada");
+			return false;
+		}else{
+			boolean r = alunos.add(aluno);
+			logger.info("Aluno " + aluno +" matriculado com sucesso");
+			return r;
+		}
 	}
+
 	
-	
+	private boolean estaCheia(){
+		return alunos.size() == config.getMaxAlunos();
+	}
 	
 }
