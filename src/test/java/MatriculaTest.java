@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
+import com.serpro.depae.treinamento.webescola.exception.DisciplinaLotadaException;
 
 
 @RunWith(DemoiselleRunner.class)
@@ -19,27 +21,24 @@ public class MatriculaTest {
 
 	@Test
 	public void matriculaAlunoComSucesso() {
-		boolean r = disciplina.matricularAluno("Fulano de Tal");
+		disciplina.matricularAluno("Fulano de Tal");
 	}
 	
 	
-	@Test
+	@Test(expected=AlunoDuplicadoException.class)
 	public void matricularAlunoDuasVezesFalha() {
-		boolean r = disciplina.matricularAluno("Fulano de Tal");
-		r = disciplina.matricularAluno("Fulano de Tal");
-		assertFalse(r);
+		disciplina.matricularAluno("Fulano de Tal");
+		disciplina.matricularAluno("Fulano de Tal");
 	}
 	
-	@Test
+	@Test(expected=DisciplinaLotadaException.class)
 	public void matricularEmDisciplinaCheiaFalha() {
 		disciplina.matricularAluno("Fulano de Tal 1");
 		disciplina.matricularAluno("Fulano de Tal 2");
 		disciplina.matricularAluno("Fulano de Tal 3");
 		disciplina.matricularAluno("Fulano de Tal 4");
 		disciplina.matricularAluno("Fulano de Tal 5");
-		boolean r = disciplina.matricularAluno("Fulano de Tal 6");
-		assertFalse(r);
+		disciplina.matricularAluno("Fulano de Tal 6");
 	}
-	
 	
 }

@@ -8,8 +8,14 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
-import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
+import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
+import br.gov.frameworkdemoiselle.stereotype.Controller;
 
+import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
+import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
+import com.serpro.depae.treinamento.webescola.exception.DisciplinaLotadaException;
+
+@Controller
 public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,17 +31,16 @@ public class Disciplina implements Serializable {
 		this.alunos = new ArrayList<String>();
 	}
 
-	public boolean matricularAluno(String aluno) {
+	public void matricularAluno(String aluno)  {
 		if (alunos.contains(aluno)) {
 			logger.info("Aluno " + aluno +" já está matriculado");
-			return false;
+			throw new AlunoDuplicadoException("Aluno " + aluno + " já está matriculado.");
 		} else if(estaCheia()){ 
 			logger.info("A disciplina está lotada");
-			return false;
+			throw new DisciplinaLotadaException("Disciplina está lotada");
 		}else{
-			boolean r = alunos.add(aluno);
+			alunos.add(aluno);
 			logger.info("Aluno " + aluno +" matriculado com sucesso");
-			return r;
 		}
 	}
 
@@ -43,5 +48,18 @@ public class Disciplina implements Serializable {
 	private boolean estaCheia(){
 		return alunos.size() == config.getMaxAlunos();
 	}
+	
+	@ExceptionHandler
+	public void handleException(AlunoDuplicadoException e) {
+		logger.info("Aluno duplicado");
+		throw e;
+	}
+	
+	@ExceptionHandler
+	public void disciplinaLotadaExceptionHandler(DisciplinaLotadaException e) {
+		logger.info("Disciplina está lotada");
+		throw e;
+	}
+	
 	
 }
