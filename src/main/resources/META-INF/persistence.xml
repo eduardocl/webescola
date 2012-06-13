@@ -9,6 +9,7 @@
 		<non-jta-data-source>java:/DefaultDS</non-jta-data-source>
 		
 		<class>com.serpro.depae.treinamento.webescola.domain.Bookmark</class>
+		<class>com.serpro.depae.treinamento.webescola.domain.Disciplina</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
