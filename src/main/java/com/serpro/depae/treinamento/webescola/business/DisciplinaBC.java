@@ -10,8 +10,10 @@ import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.message.SeverityType;
+import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
@@ -38,11 +40,11 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		this.insert(new Disciplina("História"));
 	}
 	
-	@Shutdown
-	public void terminarAplicacao() {
-		System.out.println("webescola sendo desligado!!!!!");
-	}
-	
+//	@Shutdown
+//	public void terminarAplicacao() {
+//		System.out.println("webescola sendo desligado!!!!!");
+//	}
+
 	@Inject
 	private Logger logger;
 	
@@ -65,6 +67,8 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		}
 	}
 	
+
+	@RequiredPermission(resource="disciplina", operation="insert")
 	@Override
 	public void insert(Disciplina disciplina){
 		validate(disciplina);
@@ -72,10 +76,11 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		messageContext.add("Disciplina criada com sucesso", SeverityType.INFO, null);
 	}
 	
-	public Disciplina findByName(String nome) {
+	protected Disciplina findByName(String nome) {
 		return getDelegate().findByName(nome);
 	}
 	
+	@RequiredPermission(resource="disciplina", operation="update")
 	@Override
 	public void update(Disciplina disciplina) {
 		validate(disciplina);
@@ -86,8 +91,8 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	@ExceptionHandler
 	public void businessExceptionHandler(BusinessException e) {
 		logger.info(e.getMessage());
-		messageContext.add(e.getMessage(), SeverityType.WARN, null);
-		//throw e;
+		//messageContext.add(e.getMessage(), SeverityType.WARN, null);
+		throw e;
 	}
 	
 	

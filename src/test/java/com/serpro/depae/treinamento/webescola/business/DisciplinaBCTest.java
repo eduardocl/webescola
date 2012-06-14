@@ -5,21 +5,36 @@ import static org.junit.Assert.assertNotNull;
 import javax.inject.Inject;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
+import br.gov.frameworkdemoiselle.security.SecurityContext;
 
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
+import com.serpro.depae.treinamento.webescola.security.Credenciais;
 
 @RunWith(DemoiselleRunner.class)
 public class DisciplinaBCTest {
 
 	@Inject
 	private DisciplinaBC bc;
+	
+	@Inject
+	private Credenciais credenciais;
+	
+	@Inject
+	private SecurityContext securityContext;
+	
+	@Before
+	public void setUp() {
+		credenciais.setLogin("usuario");
+		credenciais.setSenha("secreta");
+		securityContext.login();
+	}
+	
 	
 	@Test 
 	public void testFindByName() {
