@@ -45,7 +45,8 @@ public class DisciplinaBCTest {
 	public void updateDisciplinaComSucesso() {
 		bc.insert(new Disciplina("d1"));
 		Disciplina d = bc.findByName("d1");
-		bc.updateDisciplina(d.getId(), "d2");
+		d.setNome("d2");
+		bc.update(d);
 		d = bc.findByName("d2");
 		assertNotNull(d);
 		bc.delete(d.getId());
@@ -57,8 +58,9 @@ public class DisciplinaBCTest {
 		bc.insert(new Disciplina("d2"));
 		
 		Disciplina d = bc.findByName("d1");
-		bc.updateDisciplina(d.getId(), "d1");
-		bc.updateDisciplina(d.getId(), "d2");
+		bc.update(d);
+		d.setNome("d2");
+		bc.update(d);
 	}
 	
 	@After

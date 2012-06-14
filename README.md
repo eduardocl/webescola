@@ -9,6 +9,8 @@ unit tests.
 
 Conceitos abordados
 
-* Implementando uma camada de persistência (JPATransaction ou JTATransaction?)
+* Implementando uma camada de persistência (JPATransaction ou JTATransaction?) - extensão demoiselle-jsf
 * Implementando a camada de negócio (@BusinessController)
-* Camada de apresentação JSF 2 (prime faces) 
+* Camada de apresentação JSF 2 (prime faces) - extensão demoiselle-jsf 
+* Inicializadores e finalizadores @Startup e @Shutdown
+* Especificando arquivo de resource bundle com @Name
