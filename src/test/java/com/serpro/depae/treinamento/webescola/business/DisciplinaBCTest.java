@@ -1,5 +1,7 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import static org.junit.Assert.*;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -16,10 +18,17 @@ public class DisciplinaBCTest {
 	private DisciplinaBC bc;
 	
 	
+	@Test 
+	public void testFindByName() {
+		bc.insert(new Disciplina("matematica"));
+		Disciplina d = bc.findByName("matematica");
+		assertNotNull(d);
+	}
+	
+	
 	@Test
 	public void criarDisciplinaComNomeRepetidoFalha(){
-		Disciplina d1 = new Disciplina("matematica");
-		bc.insert(d1);
+		
 	}
 	
 	

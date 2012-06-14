@@ -5,6 +5,7 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.exception.BusinessException;
 import com.serpro.depae.treinamento.webescola.persistence.DisciplinaDAO;
 
 @BusinessController
@@ -14,19 +15,24 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 
 	private void validate(Disciplina disciplina){
 		if(getDelegate().findByName(disciplina.getNome()) != null){
-			
+			throw new BusinessException();
 		}
 	}
 	
 	@Override
 	public void insert(Disciplina disciplina){
 		validate(disciplina);
+		super.insert(disciplina);
 	}
 	
 	
 	@ExceptionHandler
 	public void nomeDuplicadoExceptionHandler(){
 		//....
+	}
+	
+	public Disciplina findByName(String nome) {
+		return getDelegate().findByName(nome);
 	}
 	
 	

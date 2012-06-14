@@ -1,5 +1,9 @@
 package com.serpro.depae.treinamento.webescola.persistence;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 
@@ -13,7 +17,17 @@ public class DisciplinaDAO extends JPACrud<Disciplina, Long>{
 	
 	
 	public Disciplina findByName(String nome){
-		return null;
+		Query query = createQuery("select disciplina From Disciplina disciplina where nome = :nome");
+		query.setParameter("nome", nome);
+		@SuppressWarnings("unchecked")
+		List<Disciplina> result = query.getResultList();
+		if(result == null || result.size() == 0){
+			return null;
+		}else{
+			return result.get(0);
+		}
 	}
 	
 }
+
+
