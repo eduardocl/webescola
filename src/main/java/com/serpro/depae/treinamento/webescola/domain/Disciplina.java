@@ -1,69 +1,45 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-import org.slf4j.Logger;
-
-import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
-import br.gov.frameworkdemoiselle.stereotype.Controller;
-import br.gov.frameworkdemoiselle.util.ResourceBundle;
-
-import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
-import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
-import com.serpro.depae.treinamento.webescola.exception.DisciplinaLotadaException;
-
-@Controller
+@Entity
 public class Disciplina implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private DisciplinasConfig config;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-	@Inject
-	Logger logger;
-
-	@Inject
-	private ResourceBundle bundle;
-
-	private List<String> alunos;
-
-	public Disciplina() {
-		this.alunos = new ArrayList<String>();
+	private String nome;
+		
+	public Disciplina(){}
+	
+	
+	public Disciplina(String nome){
+		this.setNome(nome);
+	}
+	
+	private Long getId() {
+		return id;
 	}
 
-	public void matricularAluno(String aluno) {
-		if (alunos.contains(aluno)) {
-			logger.info(bundle.getString("aluno.duplicado.erro"));
-			throw new AlunoDuplicadoException(bundle.getString("aluno.duplicado.erro"));
-		} else if (estaCheia()) {
-			logger.info(bundle.getString("disciplina.lotada.erro"));
-			throw new DisciplinaLotadaException(bundle.getString("disciplina.lotada.erro"));
-		} else {
-			alunos.add(aluno);
-			logger.info("Aluno " + aluno + " matriculado com sucesso");
-		}
+	private void setId(Long id) {
+		this.id = id;
 	}
 
-	private boolean estaCheia() {
-		return alunos.size() == config.getMaxAlunos();
+
+	public String getNome() {
+		return nome;
 	}
 
-	@ExceptionHandler
-	public void handleException(AlunoDuplicadoException e) {
-		logger.info("Aluno duplicado");
-		throw e;
-	}
 
-	@ExceptionHandler
-	public void disciplinaLotadaExceptionHandler(DisciplinaLotadaException e) {
-		logger.info("Disciplina está lotada");
-		throw e;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
+	
 }
