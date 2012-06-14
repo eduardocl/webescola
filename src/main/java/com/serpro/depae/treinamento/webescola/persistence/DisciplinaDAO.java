@@ -19,7 +19,6 @@ public class DisciplinaDAO extends JPACrud<Disciplina, Long>{
 	public Disciplina findByName(String nome){
 		Query query = createQuery("select disciplina From Disciplina disciplina where nome = :nome");
 		query.setParameter("nome", nome);
-		@SuppressWarnings("unchecked")
 		List<Disciplina> result = query.getResultList();
 		if(result == null || result.size() == 0){
 			return null;

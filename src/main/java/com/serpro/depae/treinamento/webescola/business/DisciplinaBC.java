@@ -1,5 +1,9 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
@@ -13,9 +17,25 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private Logger logger;
+	
 	private void validate(Disciplina disciplina){
-		if(getDelegate().findByName(disciplina.getNome()) != null){
-			throw new BusinessException();
+		
+		if(disciplina.getNome() == null || disciplina.getNome().isEmpty()) {
+			throw new BusinessException("Disciplina com nome inválido");
+		}
+		
+		//inserindo nova disciplina
+		if(getDelegate().findByName(disciplina.getNome()) != null && disciplina.getId() == null){
+			throw new BusinessException("Disciplina com nome repetido");
+		}
+		
+		//atualizando
+		Disciplina d = getDelegate().findByName(disciplina.getNome());
+		
+		if( d!=null && (d.getId() != disciplina.getId()) && (disciplina.getNome().equals(d.getNome()))){
+			throw new BusinessException("Não foi possível atualizar a disciplina: nome já existe.");
 		}
 	}
 	
@@ -25,15 +45,24 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		super.insert(disciplina);
 	}
 	
-	
-	@ExceptionHandler
-	public void nomeDuplicadoExceptionHandler(){
-		//....
-	}
-	
 	public Disciplina findByName(String nome) {
 		return getDelegate().findByName(nome);
 	}
+	
+	public void updateDisciplina(Long id, String nome) {
+		Disciplina d = getDelegate().load(id);
+		d.setNome(nome);
+		validate(d);
+		getDelegate().update(d);
+	}
+	
+	
+	@ExceptionHandler
+	public void businessExceptionHandler(BusinessException e) {
+		logger.info(e.getMessage());
+		throw e;
+	}
+	
 	
 	
 }
