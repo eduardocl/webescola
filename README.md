@@ -7,4 +7,4 @@ Implementação do cadastro de disciplinas (classes de domínio e negócio), uti
 testes para posteriormente escrevermos o código de produção. Utilizaremos as facilidades do demoiselle para logging e execução dos 
 unit tests.
 
-* Implementação autenticação.
+* Implementação autenticação e autorização.
