@@ -1,6 +1,8 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -54,6 +56,9 @@ public class Disciplina implements Serializable {
 
 
 	public Set<Aluno> getAlunos() {
+		if(this.alunos == null) {
+			this.alunos = new LinkedHashSet<Aluno>();
+		}
 		return alunos;
 	}
 

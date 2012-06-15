@@ -1,5 +1,6 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -42,6 +43,9 @@ public class Aluno {
 	}
 	
 	public Set<Disciplina> getDisciplinas() {
+		if(this.disciplinas == null) {
+			this.disciplinas = new LinkedHashSet<Disciplina>();
+		}
 		return disciplinas;
 	}
 

@@ -68,7 +68,7 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	}
 	
 
-	@RequiredPermission(resource="disciplina", operation="insert")
+	//@RequiredPermission(resource="disciplina", operation="insert")
 	@Override
 	public void insert(Disciplina disciplina){
 		validate(disciplina);
@@ -80,15 +80,12 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		return getDelegate().findByName(nome);
 	}
 	
-	@RequiredPermission(resource="disciplina", operation="update")
+	//@RequiredPermission(resource="disciplina", operation="update")
 	@Override
 	public void update(Disciplina disciplina) {
 		validate(disciplina);
 		getDelegate().update(disciplina);
 	}
-	
-	
-	@RequiredPermission(resource="disciplina", operation="update")
 	
 	
 	@ExceptionHandler
