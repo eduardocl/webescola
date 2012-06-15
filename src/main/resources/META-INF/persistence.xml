@@ -10,6 +10,7 @@
 		
 		<class>com.serpro.depae.treinamento.webescola.domain.Bookmark</class>
 		<class>com.serpro.depae.treinamento.webescola.domain.Disciplina</class>
+		<class>com.serpro.depae.treinamento.webescola.domain.Aluno</class>
 		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

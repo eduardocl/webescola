@@ -13,6 +13,12 @@
 				<p:menuitem value="#{messages['menu.disciplina.menuitem.new']}" url="/disciplina_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/disciplina_list.jsf" />
 			</p:submenu>
+			
+			<p:submenu label="#{messages['menu.aluno']}">
+				<p:menuitem value="#{messages['menu.aluno.menuitem.new']}" url="/aluno_edit.jsf" />
+				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/aluno_list.jsf" />
+			</p:submenu>
+			
 			<p:menuitem value="#{messages['menu.menuitem.quit']}" action="#{loginMB.logout}" rendered="#{securityContext.loggedIn}" />
 			<p:menuitem value="Login" url="/login.jsf" rendered="#{!securityContext.loggedIn}" ></p:menuitem>
 		</p:menubar>

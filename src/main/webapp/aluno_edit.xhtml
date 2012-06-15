@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false" rendered="#{securityContext.loggedIn}">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{alunoEditMB.insert}"
+						rendered="#{!bookmarkEditMB.updateMode}" ajax="false" />
+						
+					<p:commandButton value="#{messages['button.save']}" action="#{alunoEditMB.update}"
+						rendered="#{bookmarkEditMB.updateMode}" ajax="false" />
+						
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{bookmarkEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+						
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{alunoEditMB.delete}" immediate="true"
+							ajax="false" />
+							
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['aluno.new.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					<h:outputLabel value="#{messages['bookmark.label.id']}: " for="id" styleClass="text-input" />
+					<h:outputText id="id" value="#{alunoEditMB.bean.id}" />
+					<p:message for="id" />
+
+					<h:outputLabel value="#{messages['aluno.label.nome']}: " for="nome" styleClass="text-input" />
+					<h:inputText id="nome" value="#{alunoEditMB.bean.nome}"
+						title="#{messages['aluno.alt.nome']}" required="true" label="Nome" >
+						
+					</h:inputText>
+						
+					<p:message for="nome" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

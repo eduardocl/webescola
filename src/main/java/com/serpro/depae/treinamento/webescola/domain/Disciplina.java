@@ -1,10 +1,14 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Disciplina implements Serializable {
@@ -15,6 +19,12 @@ public class Disciplina implements Serializable {
 	@GeneratedValue
 	private Long id;
 
+	@ManyToMany
+	@JoinTable(name="disciplina_aluno",
+			joinColumns= {@JoinColumn(name="disciplina_id")},
+			inverseJoinColumns= {@JoinColumn(name="aluno_id")})
+	private Set<Aluno> alunos;
+	
 	private String nome;
 		
 	public Disciplina(){}
@@ -41,5 +51,17 @@ public class Disciplina implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
+	public Set<Aluno> getAlunos() {
+		return alunos;
+	}
+
+
+	public void setAlunos(Set<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+
 	
 }
