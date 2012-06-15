@@ -5,10 +5,10 @@ import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.security.Authenticator;
 import br.gov.frameworkdemoiselle.security.User;
-
-
+ 
+ 
 @Alternative
-public class WebEscolaAuthenticator implements Authenticator{
+public class Autenticador implements Authenticator{
 
 	private static final long serialVersionUID = 1L;
 

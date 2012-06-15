@@ -15,7 +15,7 @@ import br.gov.frameworkdemoiselle.security.SecurityContext;
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
 import com.serpro.depae.treinamento.webescola.security.Credenciais;
-
+ 
 @RunWith(DemoiselleRunner.class)
 public class DisciplinaBCTest {
 

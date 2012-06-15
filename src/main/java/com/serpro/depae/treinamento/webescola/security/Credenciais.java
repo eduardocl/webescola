@@ -3,7 +3,7 @@ package com.serpro.depae.treinamento.webescola.security;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-
+ 
 @SessionScoped
 public class Credenciais implements Serializable {
 
