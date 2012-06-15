@@ -1,8 +1,11 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Aluno {
@@ -13,7 +16,8 @@ public class Aluno {
 
 	private String nome;
 	
-	private Disciplina disciplinas;
+	@ManyToMany(targetEntity=Disciplina.class)
+	private Set<Disciplina> disciplinas;
 	
 	public Aluno() {}
 	
@@ -35,6 +39,15 @@ public class Aluno {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 	
 }
