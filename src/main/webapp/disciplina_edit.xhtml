@@ -3,7 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
 	<ui:define name="body">
-		<h:form prependId="false">
+		<h:form prependId="false" rendered="#{securityContext.loggedIn}">
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton value="#{messages['button.save']}" action="#{disciplinaEditMB.insert}"
@@ -44,6 +44,5 @@
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>
-		
 	</ui:define>
 </ui:composition>

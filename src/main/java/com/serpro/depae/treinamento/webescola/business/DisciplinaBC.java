@@ -88,6 +88,9 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	}
 	
 	
+	@RequiredPermission(resource="disciplina", operation="update")
+	
+	
 	@ExceptionHandler
 	public void businessExceptionHandler(BusinessException e) {
 		logger.info(e.getMessage());

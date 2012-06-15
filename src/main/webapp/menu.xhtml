@@ -4,7 +4,7 @@
 
 	<h:form>
 		<p:menubar>
-			<p:submenu label="#{messages['menu.bookmark']}">
+			<p:submenu label="#{messages['menu.bookmark']}" >
 				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/bookmark_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/bookmark_list.jsf" />
 			</p:submenu>
@@ -13,9 +13,8 @@
 				<p:menuitem value="#{messages['menu.disciplina.menuitem.new']}" url="/disciplina_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/disciplina_list.jsf" />
 			</p:submenu>
-
-			<p:menuitem value="#{messages['menu.menuitem.quit']}" url="http://www.frameworkdemoiselle.gov.br/"
-				action="#{securityContext.logout}" />
+			<p:menuitem value="#{messages['menu.menuitem.quit']}" action="#{loginMB.logout}" rendered="#{securityContext.loggedIn}" />
+			<p:menuitem value="Login" url="/login.jsf" rendered="#{!securityContext.loggedIn}" ></p:menuitem>
 		</p:menubar>
 	</h:form>
 

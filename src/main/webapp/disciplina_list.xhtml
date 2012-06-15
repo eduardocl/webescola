@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
 	<ui:define name="body">
-		<h:form>
+	
+		<h:form rendered="#{securityContext.loggedIn}">
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton title="#{messages['button.disciplina.new']}" icon="ui-icon-document" action="#{disciplinaListMB.getNextView}"
@@ -42,9 +43,7 @@
 					</h:commandLink>
 				</p:column>
 			</p:dataTable>
-			
-			
-			
 		</h:form>
+		
 	</ui:define>
 </ui:composition>

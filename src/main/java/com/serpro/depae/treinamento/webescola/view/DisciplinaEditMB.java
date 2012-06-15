@@ -3,6 +3,7 @@ package com.serpro.depae.treinamento.webescola.view;
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
+import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 
@@ -22,6 +23,7 @@ public class DisciplinaEditMB extends AbstractEditPageBean<Disciplina, Long>{
 		return getPreviousView();
 	}
 
+	
 	@Override
 	public String insert() {
 		this.bc.insert(getBean());

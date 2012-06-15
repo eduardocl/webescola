@@ -1,3 +1,4 @@
+
 <html xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -37,25 +38,11 @@ body {
 	<link type="text/css" rel="stylesheet" href="css/styles.css" />
 </h:head>
 
+
+
+
 <h:body style="background-color:#f1f1f1" >
-<p:panel>
-	<table style="width: 100%">
-		<tr>
-			<td height="70" align="left"><a href="index.jsf"><img src="images/logo.png" border="0" /></a></td>
-		</tr>
-		<tr>
-			<td height="20"><ui:include src="/menu.xhtml" /></td>
-		</tr>
-		<tr valign="top">
-			<td height="400"><ui:insert name="body" /></td>
-		</tr>
-
-		<tr align="center">
-			<td height="20" align="center" class="text-input">#{messages['main.footer.text']}</td>
-		</tr>
-	</table>
-</p:panel>
-
+<h:form>	
 
 	<p:growl id="messages" globalOnly="true" />
 
@@ -64,9 +51,34 @@ body {
 		</f:facet>
 
 		<f:facet name="complete">
-			<h:outputText value="" />
+			<h:outputText value="#{loginMB.msg}" />
 		</f:facet>
 	</p:ajaxStatus>
+
+
+		<p:panel header="Login">
+		 <h:panelGrid columns="2">
+		 
+		 	<h:outputLabel value="Login:" for="login" />
+		 	<p:inputText id="login" value="#{loginMB.login}" />
+		 
+		 	<h:outputLabel value="Senha:" for="senha" />
+		 	<p:password id="senha" value="#{loginMB.senha}" />
+		 	
+		 	<p:commandButton value="Logar" action="#{loginMB.login}" update="messages" />
+		 	
+		 </h:panelGrid>
+		</p:panel>
+		
+
+		
+	</h:form>	
+
+
 	<link type="text/css" rel="stylesheet" href="css/aristo/skin.css" />
+	
 </h:body>
 </html>
+
+
+
