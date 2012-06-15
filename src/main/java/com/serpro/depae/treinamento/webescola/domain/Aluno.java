@@ -40,7 +40,6 @@ public class Aluno {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	
 	public Set<Disciplina> getDisciplinas() {
 		return disciplinas;
