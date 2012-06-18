@@ -4,17 +4,17 @@
 
 	<h:form>
 		<p:menubar>
-			<p:submenu label="#{messages['menu.bookmark']}" >
+			<p:submenu label="#{messages['menu.bookmark']}" rendered="#{securityContext.loggedIn}" >
 				<p:menuitem value="#{messages['menu.menuitem.new']}" url="/bookmark_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/bookmark_list.jsf" />
 			</p:submenu>
 
-			<p:submenu label="#{messages['menu.disciplina']}">
+			<p:submenu label="#{messages['menu.disciplina']}" rendered="#{securityContext.loggedIn}">
 				<p:menuitem value="#{messages['menu.disciplina.menuitem.new']}" url="/disciplina_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/disciplina_list.jsf" />
 			</p:submenu>
 			
-			<p:submenu label="#{messages['menu.aluno']}">
+			<p:submenu label="#{messages['menu.aluno']}" rendered="#{securityContext.loggedIn}">
 				<p:menuitem value="#{messages['menu.aluno.menuitem.new']}" url="/aluno_edit.jsf" />
 				<p:menuitem value="#{messages['menu.menuitem.list']}" url="/aluno_list.jsf" />
 			</p:submenu>

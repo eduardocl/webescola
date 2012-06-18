@@ -1,5 +1,8 @@
 package com.serpro.depae.treinamento.webescola.view;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.inject.Inject;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
@@ -41,6 +44,5 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	protected void handleLoad() {
 		setBean(this.bc.load(getId()));
 	}
-
 
 }

@@ -42,6 +42,25 @@
 						
 					<p:message for="nome" />
 				</h:panelGrid>
+				<br/><br/>
+				<h:panelGrid id="disciplinas" columns="2">
+					<p:dataTable id="lista-disciplinas"  var="disciplina" value="#{alunoEditMB.bean.disciplinas}" >
+						
+						<p:column  sortBy="#{disciplina.nome}" >
+							<f:facet name="header">Disciplinas</f:facet>
+							<h:outputText value="#{disciplina.nome}" />
+						</p:column>
+						
+						<f:facet name="header">Operações</f:facet>
+						<p:column>
+							<p:commandLink 	id="excluir-aluno-link" actionListener="#{alunoEditMB.desmatricular}" ajax="false">
+								<h:outputText value="Desmatricular" />
+							</p:commandLink> 
+						</p:column>
+						
+					</p:dataTable>
+				</h:panelGrid>
+				
 			</p:fieldset>
 		</h:form>
 	</ui:define>

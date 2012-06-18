@@ -1,5 +1,6 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import javax.inject.Inject;
@@ -12,7 +13,9 @@ import org.junit.runner.RunWith;
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 import br.gov.frameworkdemoiselle.security.SecurityContext;
 
+import com.serpro.depae.treinamento.webescola.domain.Aluno;
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
 import com.serpro.depae.treinamento.webescola.security.Credenciais;
  
@@ -21,6 +24,9 @@ public class DisciplinaBCTest {
 
 	@Inject
 	private DisciplinaBC bc;
+	
+	@Inject
+	private AlunoBC alunoBC;
 	
 	@Inject
 	private Credenciais credenciais;
@@ -77,6 +83,42 @@ public class DisciplinaBCTest {
 		d.setNome("d2");
 		bc.update(d);
 	}
+	
+	
+	
+	
+	@Test
+	public void matricularAlunoComSucesso() {
+		alunoBC.insert(new Aluno("fulano"));
+		alunoBC.insert(new Aluno("fulano"));
+		bc.insert(new Disciplina("disciplina de teste"));
+		
+		bc.matricularAluno(bc.findAll().get(0).getId(), 
+				alunoBC.findAll().get(0).getId());
+	
+		bc.matricularAluno(bc.findAll().get(0).getId(), 
+				alunoBC.findAll().get(1).getId());
+		
+		Disciplina d = bc.findAll().get(0);
+		assertEquals(d.getAlunos().size(), 2);
+		
+		Aluno a = alunoBC.findAll().get(0);
+		assertEquals(a.getDisciplinas().size(), 1);
+	}
+
+	@Test(expected=AlunoDuplicadoException.class)
+	public void matricularAlunoDuasVezesFalha() {
+		bc.insert(new Disciplina("matematica"));
+		alunoBC.insert(new Aluno("fulano"));
+		
+		Aluno aluno = alunoBC.findByName("fulano");
+		Disciplina disciplina = bc.findByName("matematica");
+		
+		bc.matricularAluno(disciplina.getId(), aluno.getId());
+		bc.matricularAluno(disciplina.getId(), aluno.getId());
+		
+	}
+	
 	
 	@After
 	public void clean() {

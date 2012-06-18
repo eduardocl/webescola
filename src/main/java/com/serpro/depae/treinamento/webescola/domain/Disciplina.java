@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Disciplina implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="disciplina_aluno",
 			joinColumns= {@JoinColumn(name="disciplina_id")},
 			inverseJoinColumns= {@JoinColumn(name="aluno_id")})

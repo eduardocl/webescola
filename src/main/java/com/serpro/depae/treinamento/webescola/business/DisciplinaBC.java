@@ -1,5 +1,6 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -16,7 +17,9 @@ import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
+import com.serpro.depae.treinamento.webescola.domain.Aluno;
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
 import com.serpro.depae.treinamento.webescola.persistence.DisciplinaDAO;
 
@@ -25,6 +28,9 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private AlunoBC alunoBC;
+	
 	@Inject
 	private MessageContext messageContext;
 
@@ -85,6 +91,34 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	public void update(Disciplina disciplina) {
 		validate(disciplina);
 		getDelegate().update(disciplina);
+	}
+	
+	
+	
+	@Transactional
+	public void matricularAluno(Long disciplinaId, Long alunoId) {
+		Disciplina disciplina = this.getDelegate().load(disciplinaId);
+		Aluno aluno = alunoBC.load(alunoId);
+		
+		if(disciplina == null || aluno == null) {
+			messageContext.add("Problemas ao matricular o aluno", SeverityType.FATAL, null);
+		} else {
+			if(disciplina.getAlunos().contains(aluno)) {
+				throw new AlunoDuplicadoException(null);
+			}
+			disciplina.getAlunos().add(aluno);
+			aluno.getDisciplinas().add(disciplina);
+			this.getDelegate().update(disciplina);
+			//alunoBC.update(aluno);
+		}
+	}
+
+	
+	@Transactional
+	public void removerAlunoDaDisciplina(Long disciplinaId, Long alunoId) {
+		Disciplina disciplina = this.getDelegate().load(disciplinaId);
+		Aluno aluno = alunoBC.load(alunoId);
+		
 	}
 	
 	

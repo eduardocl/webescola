@@ -1,6 +1,7 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class Aluno {
 	private String nome;
 	
 	@ManyToMany(targetEntity=Disciplina.class)
-	private Set<Disciplina> disciplinas;
+	private List<Disciplina> disciplinas;
 	
 	public Aluno() {}
 	
@@ -42,15 +43,17 @@ public class Aluno {
 		this.nome = nome;
 	}
 	
-	public Set<Disciplina> getDisciplinas() {
+	public List<Disciplina> getDisciplinas() {
 		if(this.disciplinas == null) {
-			this.disciplinas = new LinkedHashSet<Disciplina>();
+			this.disciplinas = new ArrayList<Disciplina>();
 		}
 		return disciplinas;
 	}
 
-	public void setDisciplinas(Set<Disciplina> disciplinas) {
+	public void setDisciplinas(List<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
+	
+	
 	
 }
