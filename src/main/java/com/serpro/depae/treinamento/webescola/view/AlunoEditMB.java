@@ -1,9 +1,10 @@
 package com.serpro.depae.treinamento.webescola.view;
 
-import java.util.Collection;
-import java.util.Collections;
-
+import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+
+import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
@@ -15,11 +16,19 @@ import com.serpro.depae.treinamento.webescola.domain.Aluno;
 
 
 @ViewController
+@RequestScoped
 @PreviousView("/aluno_list.xhtml")
 public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 
 	@Inject
 	private AlunoBC bc;
+	
+	@Inject
+	private DisciplinaBC disciplinaBC;
+	
+	@Inject
+	private Logger logger;
+	
 	
 	@Override
 	public String delete() {
@@ -45,4 +54,21 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 		setBean(this.bc.load(getId()));
 	}
 
+	/**
+	 * Responde a um request ajax ná pagina aluno_edit.xhtml
+	 * 
+	 * @param disciplinaId
+	 */
+	public void desmatricular(ActionEvent event) {
+		Long disciplinaId = this.getBean().getDisciplinas().get(0).getId();
+		disciplinaBC.removerAlunoDaDisciplina(disciplinaId, getBean().getId());
+		//return "/aluno_edit.xhtml";
+	}
+
+	public void desmatricularAction(Long disciplinaId) {
+		//disciplinaId = this.getBean().getDisciplinas().get(0).getId();
+		disciplinaBC.removerAlunoDaDisciplina(disciplinaId, getBean().getId());
+	}
+
+	
 }

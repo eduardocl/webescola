@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
 
 	<ui:define name="body">
-		<h:form prependId="false" rendered="#{securityContext.loggedIn}">
+		<h:form rendered="#{securityContext.loggedIn}" prependId="false" id="form">
+		
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton value="#{messages['button.save']}" action="#{alunoEditMB.insert}"
@@ -42,26 +43,29 @@
 						
 					<p:message for="nome" />
 				</h:panelGrid>
-				<br/><br/>
-				<h:panelGrid id="disciplinas" columns="2">
-					<p:dataTable id="lista-disciplinas"  var="disciplina" value="#{alunoEditMB.bean.disciplinas}" >
-						
-						<p:column  sortBy="#{disciplina.nome}" >
-							<f:facet name="header">Disciplinas</f:facet>
-							<h:outputText value="#{disciplina.nome}" />
-						</p:column>
-						
-						<f:facet name="header">Operações</f:facet>
-						<p:column>
-							<p:commandLink 	id="excluir-aluno-link" actionListener="#{alunoEditMB.desmatricular}" ajax="false">
-								<h:outputText value="Desmatricular" />
-							</p:commandLink> 
-						</p:column>
-						
-					</p:dataTable>
-				</h:panelGrid>
-				
+
+				<br/>
+				<p:panel id="panel">
+					<h:panelGrid id="mygrid" columns="2" style="width:600px;">
+						<p:dataTable id="lista"  var="disciplina" value="#{alunoEditMB.bean.disciplinas}" >
+							<p:column  sortBy="#{disciplina.nome}" >
+								<f:facet name="header">Disciplinas</f:facet>
+								<h:outputText value="#{disciplina.nome}" />
+							</p:column>
+							<p:column>
+								<p:commandLink id="excluir-aluno-link" 
+										actionListener="#{alunoEditMB.desmatricularAction(disciplina.id)}"
+									  	value="Desmatricular" update="@parent">
+									  	
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:panel>				
 			</p:fieldset>
+				
+				<br/><br/>
+
 		</h:form>
 	</ui:define>
 </ui:composition>

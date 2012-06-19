@@ -32,8 +32,15 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 		this.getDelegate().insert(new Aluno("Maria"));
 		this.getDelegate().insert(new Aluno("José"));
 		
+		
 		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("Matemática").getId(), 
 				this.getDelegate().findByName("João").getId());
+	
+		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("Português").getId(), 
+				this.getDelegate().findByName("Maria").getId());
+		
+		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("História").getId(), 
+				this.getDelegate().findByName("Maria").getId());
 		
 	}
 	
@@ -41,7 +48,5 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	public Aluno findByName(String name) {
 		return this.getDelegate().findByName(name);
 	}
-	
-	
 	
 }

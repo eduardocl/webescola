@@ -18,7 +18,7 @@ public class Aluno {
 
 	private String nome;
 	
-	@ManyToMany(targetEntity=Disciplina.class)
+	@ManyToMany(mappedBy="alunos")
 	private List<Disciplina> disciplinas;
 	
 	public Aluno() {}
@@ -54,6 +54,22 @@ public class Aluno {
 		this.disciplinas = disciplinas;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Aluno)) {
+			return false;
+		}else {
+			Aluno a = (Aluno)obj;
+			if(a.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void removeDisciplina(Disciplina disciplina) {
+		this.disciplinas.remove(disciplina);
+	}
 	
 	
 }

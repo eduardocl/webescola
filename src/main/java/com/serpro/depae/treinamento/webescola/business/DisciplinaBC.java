@@ -1,17 +1,14 @@
 package com.serpro.depae.treinamento.webescola.business;
 
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.annotation.Name;
-import br.gov.frameworkdemoiselle.annotation.Shutdown;
 import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.message.SeverityType;
-import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
@@ -114,10 +111,12 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	}
 
 	
-	@Transactional
 	public void removerAlunoDaDisciplina(Long disciplinaId, Long alunoId) {
 		Disciplina disciplina = this.getDelegate().load(disciplinaId);
 		Aluno aluno = alunoBC.load(alunoId);
+		disciplina.removeAluno(aluno);
+		alunoBC.update(aluno);
+		//this.getDelegate().update(disciplina);
 		
 	}
 	
@@ -128,7 +127,5 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		//messageContext.add(e.getMessage(), SeverityType.WARN, null);
 		throw e;
 	}
-	
-	
 	
 }

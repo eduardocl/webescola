@@ -1,7 +1,6 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class Disciplina implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.REMOVE)
 	@JoinTable(name="disciplina_aluno",
 			joinColumns= {@JoinColumn(name="disciplina_id")},
 			inverseJoinColumns= {@JoinColumn(name="aluno_id")})
@@ -49,6 +48,13 @@ public class Disciplina implements Serializable {
 	public String getNome() {
 		return nome;
 	}
+	
+	
+	public void removeAluno(Aluno aluno) {
+		this.alunos.remove(aluno);
+		aluno.removeDisciplina(this);
+	}
+	
 
 
 	public void setNome(String nome) {
@@ -68,6 +74,19 @@ public class Disciplina implements Serializable {
 		this.alunos = alunos;
 	}
 
+
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Disciplina)) {
+			return false;
+		}else {
+			Disciplina a = (Disciplina)obj;
+			if(a.getId().equals(this.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	
 }
