@@ -1,18 +1,24 @@
 package com.serpro.depae.treinamento.webescola.view;
 
+import java.util.List;
+
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
+import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
+import br.gov.frameworkdemoiselle.message.MessageContext;
+import br.gov.frameworkdemoiselle.message.SeverityType;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 
 import com.serpro.depae.treinamento.webescola.business.AlunoBC;
 import com.serpro.depae.treinamento.webescola.business.DisciplinaBC;
 import com.serpro.depae.treinamento.webescola.domain.Aluno;
+import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.message.InfoMessages;
 
 
 @ViewController
@@ -25,6 +31,9 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	
 	@Inject
 	private DisciplinaBC disciplinaBC;
+
+	@Inject
+	private MessageContext messages;
 	
 	@Inject
 	private Logger logger;
@@ -40,6 +49,7 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	@Override
 	public String insert() {
 		this.bc.insert(getBean());
+		messages.add(InfoMessages.ALUNO_CRIADO_OK, getBean().getNome());
 		return getPreviousView();
 	}
 
@@ -54,21 +64,39 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 		setBean(this.bc.load(getId()));
 	}
 
-	/**
-	 * Responde a um request ajax ná pagina aluno_edit.xhtml
-	 * 
-	 * @param disciplinaId
-	 */
-	public void desmatricular(ActionEvent event) {
-		Long disciplinaId = this.getBean().getDisciplinas().get(0).getId();
-		disciplinaBC.removerAlunoDaDisciplina(disciplinaId, getBean().getId());
-		//return "/aluno_edit.xhtml";
+	public String desmatricular(Long disciplinaId) {
+		Disciplina d = disciplinaBC.load(disciplinaId);
+		disciplinaBC.removerAlunoDaDisciplina(d.getId(), getBean().getId());
+		updateBean(getBean().getId());
+		messages.add(InfoMessages.ALUNO_DESMATRICULADO_OK, getBean().getNome(), d.getNome());
+		return null; 
 	}
-
-	public void desmatricularAction(Long disciplinaId) {
-		//disciplinaId = this.getBean().getDisciplinas().get(0).getId();
-		disciplinaBC.removerAlunoDaDisciplina(disciplinaId, getBean().getId());
+	
+	
+	public String matricular(Long disciplinaId) {
+		Disciplina d = disciplinaBC.load(disciplinaId);
+		disciplinaBC.matricularAluno(d.getId(), getBean().getId());
+		messages.add(InfoMessages.ALUNO_MATRICULADO_OK, getBean().getNome(), d.getNome());
+		//comentar essa linha mostra mensagem de aluno duplicado na tela 
+		updateBean(getBean().getId());
+		return null;
 	}
-
+	
+	
+	public List<Disciplina> getDisciplinasDisponiveis(){
+		List disponiveis = disciplinaBC.findAll();
+		disponiveis.removeAll(getBean().getDisciplinas());
+		return disponiveis;
+	}
+	
+	@ExceptionHandler
+	public void handler(Throwable e) {
+		messages.add(e.getMessage(), SeverityType.ERROR);
+	}
+	
+	
+	private void updateBean(Long id) {
+		setBean(this.bc.load(id));
+	}
 	
 }

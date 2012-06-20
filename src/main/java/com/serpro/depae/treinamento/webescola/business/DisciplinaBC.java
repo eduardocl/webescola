@@ -14,10 +14,13 @@ import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
+import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
 import com.serpro.depae.treinamento.webescola.domain.Aluno;
 import com.serpro.depae.treinamento.webescola.domain.Disciplina;
 import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
+import com.serpro.depae.treinamento.webescola.exception.DisciplinaLotadaException;
+import com.serpro.depae.treinamento.webescola.message.WarningMessages;
 import com.serpro.depae.treinamento.webescola.persistence.DisciplinaDAO;
 
 @BusinessController
@@ -31,6 +34,8 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	@Inject
 	private MessageContext messageContext;
 
+	@Inject
+	private DisciplinasConfig config;
 	
 	@Inject
 	@Name("error-messages")
@@ -41,6 +46,19 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		this.insert(new Disciplina("Português"));
 		this.insert(new Disciplina("Matemática"));
 		this.insert(new Disciplina("História"));
+//		this.insert(new Disciplina("1"));
+//		this.insert(new Disciplina("2"));
+//		this.insert(new Disciplina("3"));
+//		this.insert(new Disciplina("4"));
+//		this.insert(new Disciplina("5"));
+//		this.insert(new Disciplina("6"));
+//		this.insert(new Disciplina("7"));
+//		this.insert(new Disciplina("8"));
+//		this.insert(new Disciplina("9"));
+//		this.insert(new Disciplina("10"));
+//		this.insert(new Disciplina("11"));
+//		this.insert(new Disciplina("12"));
+//		this.insert(new Disciplina("13"));
 	}
 	
 //	@Shutdown
@@ -98,15 +116,21 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		Aluno aluno = alunoBC.load(alunoId);
 		
 		if(disciplina == null || aluno == null) {
-			messageContext.add("Problemas ao matricular o aluno", SeverityType.FATAL, null);
+			messageContext.add("Problemas ao matricular o aluno", SeverityType.FATAL);
 		} else {
-			if(disciplina.getAlunos().contains(aluno)) {
-				throw new AlunoDuplicadoException(null);
+			
+			if( disciplina.getAlunos().size() >= config.getMaxAlunos()) {
+				throw new DisciplinaLotadaException(WarningMessages.DISCIPLINA_LOTADA, disciplina.getNome());
 			}
+			
+			if(disciplina.getAlunos().contains(aluno)) {
+				throw new AlunoDuplicadoException(WarningMessages.ALUNO_MATRICULADO_DUAS_VEZES, 
+						aluno.getNome(), disciplina.getNome());
+			}
+						
 			disciplina.getAlunos().add(aluno);
 			aluno.getDisciplinas().add(disciplina);
 			this.getDelegate().update(disciplina);
-			//alunoBC.update(aluno);
 		}
 	}
 
@@ -117,15 +141,19 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		disciplina.removeAluno(aluno);
 		alunoBC.update(aluno);
 		//this.getDelegate().update(disciplina);
-		
 	}
 	
 	
 	@ExceptionHandler
 	public void businessExceptionHandler(BusinessException e) {
 		logger.info(e.getMessage());
-		//messageContext.add(e.getMessage(), SeverityType.WARN, null);
+		messageContext.add(e.getMessage(), SeverityType.WARN, null);
 		throw e;
+	}
+
+	@ExceptionHandler
+	public void runtimeExceptionHandler(RuntimeException e) {
+		messageContext.add(e.getMessage(), SeverityType.FATAL);
 	}
 	
 }

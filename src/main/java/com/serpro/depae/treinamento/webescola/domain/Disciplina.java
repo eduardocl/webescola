@@ -88,5 +88,7 @@ public class Disciplina implements Serializable {
 		return false;
 	}
 
-	
+	public String toString() {
+		return this.nome;
+	}
 }
