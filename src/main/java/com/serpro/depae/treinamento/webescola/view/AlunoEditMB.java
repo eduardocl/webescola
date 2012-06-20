@@ -64,25 +64,6 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 		setBean(this.bc.load(getId()));
 	}
 
-	public String desmatricular(Long disciplinaId) {
-		Disciplina d = disciplinaBC.load(disciplinaId);
-		disciplinaBC.removerAlunoDaDisciplina(d.getId(), getBean().getId());
-		updateBean(getBean().getId());
-		messages.add(InfoMessages.ALUNO_DESMATRICULADO_OK, getBean().getNome(), d.getNome());
-		return null; 
-	}
-	
-	
-	public String matricular(Long disciplinaId) {
-		Disciplina d = disciplinaBC.load(disciplinaId);
-		disciplinaBC.matricularAluno(d.getId(), getBean().getId());
-		messages.add(InfoMessages.ALUNO_MATRICULADO_OK, getBean().getNome(), d.getNome());
-		//comentar essa linha mostra mensagem de aluno duplicado na tela 
-		updateBean(getBean().getId());
-		return null;
-	}
-	
-	
 	public List<Disciplina> getDisciplinasDisponiveis(){
 		List disponiveis = disciplinaBC.findAll();
 		disponiveis.removeAll(getBean().getDisciplinas());
@@ -94,9 +75,24 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 		messages.add(e.getMessage(), SeverityType.ERROR);
 	}
 	
-	
+	//se nao chamar esse método
+	//as tabelas exibidas em aluno_edit.xhtml
+	//não serão atualizadas
 	private void updateBean(Long id) {
 		setBean(this.bc.load(id));
+	}
+	
+	
+	public void matricularAjax(Long id){
+		Disciplina d = disciplinaBC.load(id);
+		disciplinaBC.matricularAluno(d.getId(), getBean().getId());
+		updateBean(getBean().getId());
+	}
+	
+	public void desmatricularAjax(Long id){
+		Disciplina d = disciplinaBC.load(id);
+		disciplinaBC.removerAlunoDaDisciplina(d.getId(), getBean().getId());
+		updateBean(getBean().getId());
 	}
 	
 }

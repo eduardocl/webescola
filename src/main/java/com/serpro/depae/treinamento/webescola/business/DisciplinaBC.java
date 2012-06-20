@@ -20,6 +20,7 @@ import com.serpro.depae.treinamento.webescola.domain.Disciplina;
 import com.serpro.depae.treinamento.webescola.exception.AlunoDuplicadoException;
 import com.serpro.depae.treinamento.webescola.exception.BusinessException;
 import com.serpro.depae.treinamento.webescola.exception.DisciplinaLotadaException;
+import com.serpro.depae.treinamento.webescola.message.InfoMessages;
 import com.serpro.depae.treinamento.webescola.message.WarningMessages;
 import com.serpro.depae.treinamento.webescola.persistence.DisciplinaDAO;
 
@@ -46,19 +47,6 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		this.insert(new Disciplina("Português"));
 		this.insert(new Disciplina("Matemática"));
 		this.insert(new Disciplina("História"));
-//		this.insert(new Disciplina("1"));
-//		this.insert(new Disciplina("2"));
-//		this.insert(new Disciplina("3"));
-//		this.insert(new Disciplina("4"));
-//		this.insert(new Disciplina("5"));
-//		this.insert(new Disciplina("6"));
-//		this.insert(new Disciplina("7"));
-//		this.insert(new Disciplina("8"));
-//		this.insert(new Disciplina("9"));
-//		this.insert(new Disciplina("10"));
-//		this.insert(new Disciplina("11"));
-//		this.insert(new Disciplina("12"));
-//		this.insert(new Disciplina("13"));
 	}
 	
 //	@Shutdown
@@ -131,6 +119,7 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 			disciplina.getAlunos().add(aluno);
 			aluno.getDisciplinas().add(disciplina);
 			this.getDelegate().update(disciplina);
+			messageContext.add(InfoMessages.ALUNO_MATRICULADO_OK, aluno.getNome(), disciplina.getNome());
 		}
 	}
 
@@ -141,6 +130,7 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 		disciplina.removeAluno(aluno);
 		alunoBC.update(aluno);
 		//this.getDelegate().update(disciplina);
+		messageContext.add(InfoMessages.ALUNO_DESMATRICULADO_OK, aluno.getNome(), disciplina.getNome());
 	}
 	
 	
@@ -153,6 +143,16 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 
 	@ExceptionHandler
 	public void runtimeExceptionHandler(RuntimeException e) {
+		messageContext.add(e.getMessage(), SeverityType.FATAL);
+	}
+	
+	@ExceptionHandler
+	public void runtimeExceptionHandler(DisciplinaLotadaException e) {
+		messageContext.add(e.getMessage(), SeverityType.FATAL);
+	}
+	
+	@ExceptionHandler
+	public void runtimeExceptionHandler(AlunoDuplicadoException e) {
 		messageContext.add(e.getMessage(), SeverityType.FATAL);
 	}
 	

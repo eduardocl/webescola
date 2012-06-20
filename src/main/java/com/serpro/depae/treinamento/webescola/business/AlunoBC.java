@@ -31,38 +31,6 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 		this.getDelegate().insert(new Aluno("João"));
 		this.getDelegate().insert(new Aluno("Maria"));
 		this.getDelegate().insert(new Aluno("José"));
-		
-		
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("Matemática").getId(), 
-//				this.getDelegate().findByName("João").getId());
-//	
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("Português").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("História").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("1").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("2").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("3").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("4").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("5").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("6").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("7").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("8").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("9").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-//		disciplinaBC.get().matricularAluno(disciplinaBC.get().findByName("10").getId(), 
-//				this.getDelegate().findByName("Maria").getId());
-		
 	}
 	
 	
