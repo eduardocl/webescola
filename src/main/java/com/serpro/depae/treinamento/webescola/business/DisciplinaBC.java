@@ -94,7 +94,7 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	public void insert(Disciplina disciplina){
 		validate(disciplina);
 		super.insert(disciplina);
-		messageContext.add("Disciplina criada com sucesso", SeverityType.INFO, null);
+		messageContext.add("Disciplina criada com sucesso", SeverityType.INFO, null);	
 	}
 	
 	protected Disciplina findByName(String nome) {
@@ -147,7 +147,7 @@ public class DisciplinaBC extends DelegateCrud<Disciplina, Long, DisciplinaDAO>{
 	@ExceptionHandler
 	public void businessExceptionHandler(BusinessException e) {
 		logger.info(e.getMessage());
-		messageContext.add(e.getMessage(), SeverityType.WARN, null);
+		messageContext.add(e.getMessage(), SeverityType.ERROR);
 		throw e;
 	}
 
