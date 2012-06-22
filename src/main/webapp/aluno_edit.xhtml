@@ -50,8 +50,15 @@
 						title="#{messages['aluno.alt.nome']}" required="true" label="Nome" >
 						
 					</h:inputText>
-						
 					<p:message for="nome" />
+					
+					
+					<h:outputLabel value="CPF:" for="cpf" styleClass="text-input"/>
+					<h:inputText id="cpf" value="#{alunoEditMB.bean.cpf}"
+						title="#{messages['aluno.alt.nome']}" label="cpf" >
+						
+					</h:inputText>
+					<p:message for="cpf" />				
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

@@ -2,12 +2,13 @@ package com.serpro.depae.treinamento.webescola.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import br.gov.frameworkdemoiselle.validation.annotation.Cpf;
 
 @Entity
 public class Aluno {
@@ -17,6 +18,10 @@ public class Aluno {
 	private Long id;
 
 	private String nome;
+	
+	@Cpf
+	private String cpf;
+	
 	
 	@ManyToMany(mappedBy="alunos")
 	private List<Disciplina> disciplinas;
@@ -69,6 +74,14 @@ public class Aluno {
 
 	public void removeDisciplina(Disciplina disciplina) {
 		this.disciplinas.remove(disciplina);
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 	
