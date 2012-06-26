@@ -12,21 +12,21 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractListPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 
-import com.serpro.depae.treinamento.webescola.business.DisciplinaBC;
-import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.business.TurmaBC;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 
 @ViewController
-@NextView("/disciplina_edit.xhtml")
-@PreviousView("/disciplina_list.xhtml")
-public class DisciplinaListMB extends AbstractListPageBean<Disciplina, Long>{
+@NextView("/turma_edit.xhtml")
+@PreviousView("/turma_list.xhtml")
+public class TurmaListMB extends AbstractListPageBean<Turma, Long>{
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private DisciplinaBC bc;
+	private TurmaBC bc;
 	
 	@Override
-	protected List<Disciplina> handleResultList() {
+	protected List<Turma> handleResultList() {
 		return this.bc.findAll();
 	}
 	

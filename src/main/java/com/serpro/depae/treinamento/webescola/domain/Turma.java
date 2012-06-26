@@ -13,7 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Disciplina implements Serializable {
+public class Turma implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -21,18 +21,18 @@ public class Disciplina implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany(cascade=CascadeType.REMOVE)
-	@JoinTable(name="disciplina_aluno",
-			joinColumns= {@JoinColumn(name="disciplina_id")},
+	@ManyToMany
+	@JoinTable(name="turma_aluno",
+			joinColumns= {@JoinColumn(name="turma_id")},
 			inverseJoinColumns= {@JoinColumn(name="aluno_id")})
 	private Set<Aluno> alunos;
 	
 	private String nome;
 		
-	public Disciplina(){}
+	public Turma(){}
 	
 	
-	public Disciplina(String nome){
+	public Turma(String nome){
 		this.setNome(nome);
 	}
 	
@@ -52,7 +52,7 @@ public class Disciplina implements Serializable {
 	
 	public void removeAluno(Aluno aluno) {
 		this.alunos.remove(aluno);
-		aluno.removeDisciplina(this);
+		aluno.removeTurma(this);
 	}
 	
 
@@ -77,10 +77,10 @@ public class Disciplina implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof Disciplina)) {
+		if(!(obj instanceof Turma)) {
 			return false;
 		}else {
-			Disciplina a = (Disciplina)obj;
+			Turma a = (Turma)obj;
 			if(a.getId().equals(this.getId())) {
 				return true;
 			}

@@ -3,8 +3,8 @@ package com.serpro.depae.treinamento.webescola.configuration;
 import br.gov.frameworkdemoiselle.configuration.Configuration;
 
 
-@Configuration(resource="disciplina")
-public class DisciplinasConfig {
+@Configuration(resource="turma")
+public class TurmasConfig {
 
 	private Integer maxAlunos;
 

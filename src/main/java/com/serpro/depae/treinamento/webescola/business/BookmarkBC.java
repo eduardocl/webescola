@@ -9,7 +9,7 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 
-import com.serpro.depae.treinamento.webescola.configuration.DisciplinasConfig;
+import com.serpro.depae.treinamento.webescola.configuration.TurmasConfig;
 import com.serpro.depae.treinamento.webescola.domain.Bookmark;
 import com.serpro.depae.treinamento.webescola.persistence.BookmarkDAO;
 
@@ -21,7 +21,7 @@ public class BookmarkBC extends DelegateCrud<Bookmark, Long, BookmarkDAO> {
 	@Inject
 	private Logger logger;
 	
-	@Inject DisciplinasConfig config;
+	@Inject TurmasConfig config;
 	
 	@Startup
 	@Transactional

@@ -15,9 +15,9 @@ import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 
 import com.serpro.depae.treinamento.webescola.business.AlunoBC;
-import com.serpro.depae.treinamento.webescola.business.DisciplinaBC;
+import com.serpro.depae.treinamento.webescola.business.TurmaBC;
 import com.serpro.depae.treinamento.webescola.domain.Aluno;
-import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 import com.serpro.depae.treinamento.webescola.message.InfoMessages;
 
 
@@ -30,7 +30,7 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	private AlunoBC bc;
 	
 	@Inject
-	private DisciplinaBC disciplinaBC;
+	private TurmaBC turmaBC;
 
 	@Inject
 	private MessageContext messages;
@@ -41,6 +41,7 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	
 	@Override
 	public String delete() {
+		this.bc.removeAlunoDasTurmas(getId());
 		this.bc.delete(getId());
 		return getPreviousView();
 	}
@@ -64,9 +65,9 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 		setBean(this.bc.load(getId()));
 	}
 
-	public List<Disciplina> getDisciplinasDisponiveis(){
-		List disponiveis = disciplinaBC.findAll();
-		disponiveis.removeAll(getBean().getDisciplinas());
+	public List<Turma> getTurmasDisponiveis(){
+		List disponiveis = turmaBC.findAll();
+		disponiveis.removeAll(getBean().getTurmas());
 		return disponiveis;
 	}
 	
@@ -84,14 +85,14 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	
 	
 	public void matricularAjax(Long id){
-		Disciplina d = disciplinaBC.load(id);
-		disciplinaBC.matricularAluno(d.getId(), getBean().getId());
+		Turma d = turmaBC.load(id);
+		turmaBC.matricularAluno(d.getId(), getBean().getId());
 		updateBean(getBean().getId());
 	}
 	
 	public void desmatricularAjax(Long id){
-		Disciplina d = disciplinaBC.load(id);
-		disciplinaBC.removerAlunoDaDisciplina(d.getId(), getBean().getId());
+		Turma d = turmaBC.load(id);
+		turmaBC.removerAlunoDaTurma(d.getId(), getBean().getId());
 		updateBean(getBean().getId());
 	}
 	

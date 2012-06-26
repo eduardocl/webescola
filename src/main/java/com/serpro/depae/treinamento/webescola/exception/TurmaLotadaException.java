@@ -4,10 +4,10 @@ import br.gov.frameworkdemoiselle.exception.ApplicationException;
 import br.gov.frameworkdemoiselle.message.Message;
 import br.gov.frameworkdemoiselle.message.SeverityType;
 
+@ApplicationException(rollback=true, severity=SeverityType.ERROR)
+public class TurmaLotadaException extends BusinessException {
 
-public class DisciplinaLotadaException extends BusinessException {
-
-	public DisciplinaLotadaException(Message message, Object... params) {
+	public TurmaLotadaException(Message message, Object... params) {
 		super(message, params);
 	}
 

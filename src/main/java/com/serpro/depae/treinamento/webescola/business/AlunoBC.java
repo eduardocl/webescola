@@ -9,8 +9,10 @@ import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
+import br.gov.frameworkdemoiselle.transaction.Transactional;
 
 import com.serpro.depae.treinamento.webescola.domain.Aluno;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 import com.serpro.depae.treinamento.webescola.persistence.AlunoDAO;
 
 
@@ -21,7 +23,7 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	private MessageContext messageContext;
 	
 	@Inject 
-	private Instance<DisciplinaBC> disciplinaBC;
+	private Instance<TurmaBC> turmaBC;
 	
 	@Inject
 	private Logger logger;
@@ -36,6 +38,15 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	
 	public Aluno findByName(String name) {
 		return this.getDelegate().findByName(name);
+	}
+
+	@Transactional
+	public void removeAlunoDasTurmas(Long id) {
+		Aluno aluno = this.load(id);
+		for(Turma turma: aluno.getTurmas()) {
+			turma.removeAluno(aluno);
+			turmaBC.get().update(turma);
+		}
 	}
 	
 }

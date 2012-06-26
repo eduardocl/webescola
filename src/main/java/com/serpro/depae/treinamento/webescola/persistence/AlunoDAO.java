@@ -8,7 +8,7 @@ import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 
 import com.serpro.depae.treinamento.webescola.domain.Aluno;
-import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 
 @PersistenceController
 public class AlunoDAO extends JPACrud<Aluno, Long>{

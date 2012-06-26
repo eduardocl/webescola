@@ -7,8 +7,8 @@
 		<h:form rendered="#{securityContext.loggedIn}">
 			<p:toolbar>
 				<p:toolbarGroup align="left">
-					<p:commandButton title="#{messages['button.disciplina.new']}" icon="ui-icon-document" action="#{disciplinaListMB.getNextView}"
-						actionListener="#{disciplinaListMB.clear}" ajax="false" />
+					<p:commandButton title="#{messages['button.turma.new']}" icon="ui-icon-document" action="#{turmaListMB.getNextView}"
+						actionListener="#{turmaListMB.clear}" ajax="false" />
 
 					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
 						type="button" immediate="true" ajax="false" />
@@ -16,28 +16,28 @@
 					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
 						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
 
-						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{disciplinaListMB.deleteSelection}"
-							actionListener="#{disciplinaListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{turmaListMB.deleteSelection}"
+							actionListener="#{turmaListMB.clear}" />
 							
 						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
 					</p:confirmDialog>
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:dataTable id="list" var="bean" value="#{disciplinaListMB.resultList}">
-				<f:facet name="header">#{messages['disciplina.list.table.title']}</f:facet>
+			<p:dataTable id="list" var="bean" value="#{turmaListMB.resultList}">
+				<f:facet name="header">#{messages['turma.list.table.title']}</f:facet>
 				<p:column style="width:5%;">
-					<h:selectBooleanCheckbox value="#{disciplinaListMB.selection[bean.id]}" />
+					<h:selectBooleanCheckbox value="#{turmaListMB.selection[bean.id]}" />
 				</p:column>
 				
 				<p:column style="width:5%;" sortBy="#{bean.id}">
-					<f:facet name="header">#{messages['disciplina.label.id']}</f:facet>
+					<f:facet name="header">#{messages['turma.label.id']}</f:facet>
 					<h:outputText value="#{bean.id}" />
 				</p:column>
 				
 				<p:column sortBy="#{bean.nome}">
-					<f:facet name="header">#{messages['disciplina.label.nome']}</f:facet>
-					<h:commandLink action="#{disciplinaListMB.getNextView}" actionListener="#{disciplinaListMB.clear}">
+					<f:facet name="header">#{messages['turma.label.nome']}</f:facet>
+					<h:commandLink action="#{turmaListMB.getNextView}" actionListener="#{turmaListMB.clear}">
 						<h:outputText value="#{bean.nome}" />
 						<f:param name="id" value="#{bean.id}" />
 					</h:commandLink>

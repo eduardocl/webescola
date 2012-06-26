@@ -7,15 +7,15 @@ import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 
-import com.serpro.depae.treinamento.webescola.business.DisciplinaBC;
-import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.business.TurmaBC;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 
 @ViewController
-@PreviousView("/disciplina_list.xhtml")
-public class DisciplinaEditMB extends AbstractEditPageBean<Disciplina, Long>{
+@PreviousView("/turma_list.xhtml")
+public class TurmaEditMB extends AbstractEditPageBean<Turma, Long>{
 
 	@Inject
-	private DisciplinaBC bc;
+	private TurmaBC bc;
 	
 	@Override
 	public String delete() {

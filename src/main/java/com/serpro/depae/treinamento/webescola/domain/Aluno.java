@@ -3,6 +3,7 @@ package com.serpro.depae.treinamento.webescola.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,14 +18,16 @@ public class Aluno {
 	@GeneratedValue
 	private Long id;
 
+	@Column(name="nome")
 	private String nome;
 	
+	@Column(name="cpf")
 	@Cpf
 	private String cpf;
 	
 	
 	@ManyToMany(mappedBy="alunos")
-	private List<Disciplina> disciplinas;
+	private List<Turma> turmas;
 	
 	public Aluno() {}
 	
@@ -48,15 +51,15 @@ public class Aluno {
 		this.nome = nome;
 	}
 	
-	public List<Disciplina> getDisciplinas() {
-		if(this.disciplinas == null) {
-			this.disciplinas = new ArrayList<Disciplina>();
+	public List<Turma> getTurmas() {
+		if(this.turmas == null) {
+			this.turmas = new ArrayList<Turma>();
 		}
-		return disciplinas;
+		return turmas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 	
 	@Override
@@ -72,8 +75,8 @@ public class Aluno {
 		return false;
 	}
 
-	public void removeDisciplina(Disciplina disciplina) {
-		this.disciplinas.remove(disciplina);
+	public void removeTurma(Turma turma) {
+		this.turmas.remove(turma);
 	}
 
 	public String getCpf() {

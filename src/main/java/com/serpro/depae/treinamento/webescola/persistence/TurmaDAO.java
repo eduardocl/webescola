@@ -7,19 +7,19 @@ import javax.persistence.Query;
 import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 
-import com.serpro.depae.treinamento.webescola.domain.Disciplina;
+import com.serpro.depae.treinamento.webescola.domain.Turma;
 
 @PersistenceController
-public class DisciplinaDAO extends JPACrud<Disciplina, Long>{
+public class TurmaDAO extends JPACrud<Turma, Long>{
 
 	private static final long serialVersionUID = 2845674256596349623L;
 
 	
 	
-	public Disciplina findByName(String nome){
-		Query query = createQuery("select disciplina From Disciplina disciplina where nome = :nome");
+	public Turma findByName(String nome){
+		Query query = createQuery("select turma From Turma turma where nome = :nome");
 		query.setParameter("nome", nome);
-		List<Disciplina> result = query.getResultList();
+		List<Turma> result = query.getResultList();
 		if(result == null || result.size() == 0){
 			return null;
 		}else{

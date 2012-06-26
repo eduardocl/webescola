@@ -10,6 +10,6 @@ public interface WarningMessages {
 	
 	final Message ALUNO_MATRICULADO_DUAS_VEZES = new DefaultMessage("{aluno.matriculado.duplicado}", SeverityType.WARN);
 	
-	final Message DISCIPLINA_LOTADA = new DefaultMessage("{disciplina.lotada}", SeverityType.WARN);
+	final Message TURMA_LOTADA = new DefaultMessage("{turma.lotada}", SeverityType.WARN);
 	
 }

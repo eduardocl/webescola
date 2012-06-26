@@ -11,6 +11,6 @@ public interface InfoMessages {
 	final Message ALUNO_MATRICULADO_OK = new DefaultMessage("{aluno.matriculado.ok}", SeverityType.INFO);
 	final Message ALUNO_DESMATRICULADO_OK = new DefaultMessage("{aluno.desmatriculado.ok}", SeverityType.INFO);
 	
-	final Message DISCIPLINA_CRIADA_OK = new DefaultMessage("{disciplina.criada.ok}", SeverityType.INFO);
+	final Message TURMA_CRIADA_OK = new DefaultMessage("{turma.criada.ok}", SeverityType.INFO);
 	
 }

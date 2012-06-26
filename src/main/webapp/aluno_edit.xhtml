@@ -64,17 +64,17 @@
 		</h:form>
 
 		<h:form rendered="#{alunoEditMB.bean.id != null}">
-			<p:fieldset toggleable="true" legend="Disciplinas Matriculadas">
-				<p:panel title="Disciplinas Matriculadas" closable="true">
-					<p:dataTable var="disciplina" 
-						value="#{alunoEditMB.bean.disciplinas}" style="width:500px;">
-						<p:column sortBy="#{disciplina.nome}">
-							<f:facet name="header">Disciplinas</f:facet>
-							<h:outputText value="#{disciplina.nome}" />
+			<p:fieldset toggleable="true" legend="Turmas Matriculadas">
+				<p:panel title="Turmas Matriculadas" closable="true">
+					<p:dataTable var="turma" 
+						value="#{alunoEditMB.bean.turmas}" style="width:500px;">
+						<p:column sortBy="#{turma.nome}">
+							<f:facet name="header">Turmas</f:facet>
+							<h:outputText value="#{turma.nome}" />
 						</p:column>
 						<p:column>
 							<p:commandButton id="excluir-aluno-link"
-								action="#{alunoEditMB.desmatricularAjax(disciplina.id)}"
+								action="#{alunoEditMB.desmatricularAjax(turma.id)}"
 								ajax="true" icon="ui-icon-trash" update="@form, :messages">
 							</p:commandButton>
 						</p:column>
@@ -83,18 +83,18 @@
 			</p:fieldset>
 			<br />
 			<br />
-			<p:fieldset toggleable="true" legend="Disciplinas Disponiveis">
-				<p:panel title="Disciplinas Matriculadas" closable="true">
-					<p:dataTable var="disciplina"
-						value="#{alunoEditMB.disciplinasDisponiveis()}"
+			<p:fieldset toggleable="true" legend="Turmas Disponiveis">
+				<p:panel title="Turmas Matriculadas" closable="true">
+					<p:dataTable var="turma"
+						value="#{alunoEditMB.turmasDisponiveis}"
 						style="width:500px;">
-						<p:column sortBy="#{disciplina.nome}">
-							<f:facet name="header">Disciplinas</f:facet>
-							<h:outputText value="#{disciplina.nome}" />
+						<p:column sortBy="#{turma.nome}">
+							<f:facet name="header">Turmas</f:facet>
+							<h:outputText value="#{turma.nome}" />
 						</p:column>
 						<p:column>
 							<p:commandButton id="excluir-aluno-link"
-								action="#{alunoEditMB.matricularAjax(disciplina.id)}"
+								action="#{alunoEditMB.matricularAjax(turma.id)}"
 								ajax="true" icon="ui-icon-plusthick" update="@form, :messages">
 							</p:commandButton>
 						</p:column>
