@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="turmas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0c82020-8c37-4d80-91ef-1c80d4cde0b0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="b8179bbe-acbb-4ed8-a874-88321ffc87d4"/>
+	<subDataset name="dataset2" uuid="afdf83f3-37f3-41d6-ba63-aa85647c35d1"/>
+	<queryString language="xPath">
+		<![CDATA[/turmas/turma/alunos/aluno]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[/turmas/turma/nome]]></fieldDescription>
+	</field>
+	<field name="aluno" class="java.lang.String">
+		<fieldDescription><![CDATA[child::text()]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="a73cfe86-317f-4bf0-b5b9-0c23e31991ed" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="10abd4fb-9c44-46ba-bfe5-b0e78d4f23b7" x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Turmas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2030be7c-6440-419b-9c97-f4ee96388c16" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório de turmas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21"/>
+	</columnHeader>
+	<detail>
+		<band height="126">
+			<line>
+				<reportElement uuid="75be425a-18d2-4fff-8dc0-aa6dd002be05" x="20" y="19" width="535" height="1" forecolor="#666666"/>
+			</line>
+			<componentElement>
+				<reportElement uuid="2aed2c3a-e976-4a0c-89e3-5dcfc4c1f4b3" x="54" y="44" width="400" height="50"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset2" uuid="c4a46a27-f4f1-4a76-bab7-36c9646ea532">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("/alunos/aluno")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="0">
+						<textField>
+							<reportElement uuid="8c8e4870-f4f6-4b79-ac23-4044f501b40c" x="6" y="7" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="938e66e0-0484-44c9-a241-4af2a3a92434" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="ed45bee0-db6b-471f-ab75-2762b9ae47b2" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="ee6e925c-cf8f-4a96-914e-96a037c25adc" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

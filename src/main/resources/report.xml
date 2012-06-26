@@ -1,0 +1,59 @@
+<turmas>
+ <turma>
+ 	<nome>Portugues</nome>
+ 	<alunos>
+ 		<aluno>
+ 			<nome>Aline</nome>
+ 			<cpf>11.11.11.11</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Mauro</nome>
+ 			<cpf>34.43.44.44</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Eduardo</nome>
+ 			<cpf>444556665444</cpf>
+ 		</aluno>
+ 	</alunos>
+ </turma>
+
+ <turma>
+ 	<nome>Matemática</nome>
+ 	 	<alunos>
+ 		<aluno>
+ 			<nome>João</nome>
+ 			<cpf>444556665444</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Pedro</nome>
+ 			<cpf>34.43.44.44</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Maria</nome>
+ 			<cpf>34.43.44.44</cpf>
+ 		</aluno>
+ 	</alunos>
+
+ </turma>
+
+ <turma>
+ 	<nome>História</nome>
+ 	 	<alunos>
+ 		<aluno>
+ 			<nome>Aline</nome>
+ 			<cpf>11.11.11.11</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Mauro</nome>
+ 			<cpf>11.11.11.11</cpf>
+ 		</aluno>
+ 		<aluno>
+ 			<nome>Eduardo</nome>
+ 			<cpf>11.11.11.11</cpf>
+ 		</aluno>
+ 	</alunos>
+
+ </turma>
+
+ 
+</turmas>
