@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="turmas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0c82020-8c37-4d80-91ef-1c80d4cde0b0">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="dataset1" uuid="b8179bbe-acbb-4ed8-a874-88321ffc87d4"/>
 	<subDataset name="dataset2" uuid="afdf83f3-37f3-41d6-ba63-aa85647c35d1"/>
+	<subDataset name="dataset3" uuid="860d00de-f4e9-4240-bcf2-340d2cf36032">
+		<queryString language="xPath">
+			<![CDATA[/turmas/turma/aluno]]>
+		</queryString>
+		<field name="cpf" class="java.lang.String">
+			<fieldDescription><![CDATA[@cpf]]></fieldDescription>
+		</field>
+		<field name="nome" class="java.lang.String">
+			<fieldDescription><![CDATA[@nome]]></fieldDescription>
+		</field>
+	</subDataset>
 	<queryString language="xPath">
-		<![CDATA[/turmas/turma/alunos/aluno]]>
+		<![CDATA[/turmas/turma]]>
 	</queryString>
 	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[/turmas/turma/nome]]></fieldDescription>
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
 	</field>
 	<field name="aluno" class="java.lang.String">
-		<fieldDescription><![CDATA[child::text()]]></fieldDescription>
+		<fieldDescription><![CDATA[aluno]]></fieldDescription>
 	</field>
 	<background>
 		<band/>
@@ -45,25 +56,51 @@
 		<band height="21"/>
 	</columnHeader>
 	<detail>
-		<band height="126">
+		<band height="93">
 			<line>
 				<reportElement uuid="75be425a-18d2-4fff-8dc0-aa6dd002be05" x="20" y="19" width="535" height="1" forecolor="#666666"/>
 			</line>
+			<textField>
+				<reportElement uuid="386c0b9b-e9d7-4764-b02f-262c07b3ec71" x="20" y="0" width="100" height="20" forecolor="#0000FF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
 			<componentElement>
-				<reportElement uuid="2aed2c3a-e976-4a0c-89e3-5dcfc4c1f4b3" x="54" y="44" width="400" height="50"/>
+				<reportElement uuid="5ce05838-6d69-43a0-a002-92e111237d22" x="61" y="44" width="400" height="23"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="dataset2" uuid="c4a46a27-f4f1-4a76-bab7-36c9646ea532">
-						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("/alunos/aluno")]]></dataSourceExpression>
+					<datasetRun subDataset="dataset3" uuid="a26bf113-0817-4d6e-bc9f-af61d09ed83e">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("/turma/aluno")]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="50" width="0">
+					<jr:listContents height="23" width="400">
 						<textField>
-							<reportElement uuid="8c8e4870-f4f6-4b79-ac23-4044f501b40c" x="6" y="7" width="100" height="20"/>
+							<reportElement uuid="8e4f02f6-9072-46c4-bfce-47ed413fa10d" x="12" y="0" width="183" height="20"/>
 							<textElement/>
 							<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement uuid="acf06128-4df8-4515-8e50-81aa5c8ac506" x="214" y="0" width="100" height="20"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
+			<staticText>
+				<reportElement uuid="fed8e6ae-da6d-4f78-8020-0f0541f140d8" x="74" y="25" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0f87d607-3f11-4ee2-890b-25817bae108b" x="275" y="25" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
