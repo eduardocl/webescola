@@ -1,16 +1,19 @@
 package com.serpro.depae.treinamento.webescola.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import br.gov.frameworkdemoiselle.transaction.Transactional;
 
 @Entity
 public class Turma implements Serializable {
@@ -21,11 +24,11 @@ public class Turma implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="turma_aluno",
 			joinColumns= {@JoinColumn(name="turma_id")},
 			inverseJoinColumns= {@JoinColumn(name="aluno_id")})
-	private Set<Aluno> alunos;
+	private List<Aluno> alunos;
 	
 	private String nome;
 		
@@ -61,16 +64,16 @@ public class Turma implements Serializable {
 		this.nome = nome;
 	}
 
-
-	public Set<Aluno> getAlunos() {
+	@Transactional
+	public List<Aluno> getAlunos() {
 		if(this.alunos == null) {
-			this.alunos = new LinkedHashSet<Aluno>();
+			this.alunos = new ArrayList<Aluno>();
 		}
 		return alunos;
 	}
 
 
-	public void setAlunos(Set<Aluno> alunos) {
+	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
 	}
 

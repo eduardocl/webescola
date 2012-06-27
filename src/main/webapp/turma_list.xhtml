@@ -26,6 +26,11 @@
 
 			<p:dataTable id="list" var="bean" value="#{turmaListMB.resultList}">
 				<f:facet name="header">#{messages['turma.list.table.title']}</f:facet>
+				
+				 <p:column style="width:16px">
+            		<p:rowToggler />
+        		 </p:column>
+				
 				<p:column style="width:5%;">
 					<h:selectBooleanCheckbox value="#{turmaListMB.selection[bean.id]}" />
 				</p:column>
@@ -42,8 +47,30 @@
 						<f:param name="id" value="#{bean.id}" />
 					</h:commandLink>
 				</p:column>
+				
+				
+		<p:rowExpansion >
+            <h:panelGrid id="displayMatriculados" columns="1" cellpadding="0"
+                        style="width:100%;"
+                        styleClass="ui-widget-content"
+                        columnClasses="label, value">
+				<p:column>
+				 <p:dataList value="#{bean.alunos}" var="car" type="ordered" >  
+				     #{car.nome}  
+				 </p:dataList> 
+				</p:column>
+				
+				
+				
+				
+            </h:panelGrid>
+
+        </p:rowExpansion>		
+				
+				
 			</p:dataTable>
 		</h:form>
+		
 		
 	</ui:define>
 </ui:composition>
