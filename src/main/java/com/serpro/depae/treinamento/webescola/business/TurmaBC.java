@@ -1,5 +1,8 @@
 package com.serpro.depae.treinamento.webescola.business;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -9,9 +12,13 @@ import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.message.SeverityType;
+import br.gov.frameworkdemoiselle.report.Report;
+import br.gov.frameworkdemoiselle.report.Type;
+import br.gov.frameworkdemoiselle.report.annotation.Path;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
+import br.gov.frameworkdemoiselle.util.FileRenderer;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 import com.serpro.depae.treinamento.webescola.configuration.TurmasConfig;
@@ -41,6 +48,9 @@ public class TurmaBC extends DelegateCrud<Turma, Long, TurmaDAO>{
 	@Inject
 	@Name("error-messages")
 	private ResourceBundle bundle;
+	
+	
+	
 	
 	@Startup
 	public void inserirTurmasExemplo() {

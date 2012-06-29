@@ -21,6 +21,9 @@
 							
 						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
 					</p:confirmDialog>
+					
+					<h:commandLink target="popupWindow" value="Gerar PDF" action="#{turmaListMB.showReport()}" />
+					
 				</p:toolbarGroup>
 			</p:toolbar>
 

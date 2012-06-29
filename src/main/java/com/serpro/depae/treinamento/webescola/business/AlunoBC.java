@@ -30,9 +30,9 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	
 	@Startup
 	public void inserirAlunos() {
-//		this.getDelegate().insert(new Aluno("João"));
-//		this.getDelegate().insert(new Aluno("Maria"));
-//		this.getDelegate().insert(new Aluno("José"));
+		this.getDelegate().insert(new Aluno("João"));
+		this.getDelegate().insert(new Aluno("Maria"));
+		this.getDelegate().insert(new Aluno("José"));
 	}
 	
 	

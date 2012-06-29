@@ -8,10 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.gov.frameworkdemoiselle.validation.annotation.Cpf;
 
 @Entity
+@XmlRootElement
 public class Aluno {
 
 	@Id
@@ -43,7 +46,9 @@ public class Aluno {
 		this.id = id;
 	}
 
+	@XmlAttribute
 	public String getNome() {
+		System.out.println("aluno getNome");
 		return nome;
 	}
 
@@ -79,6 +84,7 @@ public class Aluno {
 		this.turmas.remove(turma);
 	}
 
+	@XmlAttribute
 	public String getCpf() {
 		return cpf;
 	}
