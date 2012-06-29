@@ -4,8 +4,8 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="dataset3">
-		<queryString language="xPath">
-			<![CDATA[*turma/alunos/aluno]]>
+		<queryString>
+			<![CDATA[]]>
 		</queryString>
 		<field name="nome" class="java.lang.String">
 			<fieldDescription><![CDATA[nome]]></fieldDescription>
@@ -14,9 +14,12 @@
 			<fieldDescription><![CDATA[cpf]]></fieldDescription>
 		</field>
 	</subDataset>
-	<queryString language="xPath">
-		<![CDATA[*/turma]]>
+	<queryString>
+		<![CDATA[]]>
 	</queryString>
+	<field name="alunos" class="java.util.List">
+		<fieldDescription><![CDATA[alunos]]></fieldDescription>
+	</field>
 	<field name="nome" class="java.lang.String">
 		<fieldDescription><![CDATA[nome]]></fieldDescription>
 	</field>
@@ -66,7 +69,7 @@
 				<reportElement x="61" y="44" width="400" height="23"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dataset3">
-						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}.subDataSource("/turma/alunos/aluno")]]></dataSourceExpression>
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{alunos})]]></dataSourceExpression>
 					</datasetRun>
 					<jr:listContents height="23" width="400">
 						<textField>

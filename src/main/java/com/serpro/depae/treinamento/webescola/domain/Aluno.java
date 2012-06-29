@@ -25,7 +25,7 @@ public class Aluno {
 	private String nome;
 	
 	@Column(name="cpf")
-	@Cpf
+	//@Cpf descomente para que ocorra a validação
 	private String cpf;
 	
 	
@@ -36,6 +36,11 @@ public class Aluno {
 	
 	public Aluno(String nome) {
 		this.nome = nome;
+	}
+	
+	public Aluno(String nome, String cpf) {
+		this.nome = nome;
+		this.cpf = cpf;
 	}
 	
 	public Long getId() {

@@ -10,3 +10,4 @@ unit tests.
 * Implementação do modelo "aluno (domínio, negócio e apresentação). Exemplo de um mapeamento JPA many to many
 * Uso da extensão demoiselle-validation para validar o cpf do aluno.
 * adição/remoção do aluno de disciplinas via ajax. Página atualizando data tables do primefaces.
+* Geração de um relatório utilizando as facilidades do framework

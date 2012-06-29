@@ -19,20 +19,19 @@ import com.serpro.depae.treinamento.webescola.persistence.AlunoDAO;
 @BusinessController
 public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	
-	@Inject
-	private MessageContext messageContext;
-	
 	@Inject 
 	private Instance<TurmaBC> turmaBC;
 	
-	@Inject
-	private Logger logger;
-	
 	@Startup
 	public void inserirAlunos() {
-		this.getDelegate().insert(new Aluno("João"));
-		this.getDelegate().insert(new Aluno("Maria"));
-		this.getDelegate().insert(new Aluno("José"));
+		this.getDelegate().insert(new Aluno("João",  "1122234"));
+		this.getDelegate().insert(new Aluno("Maria", "2333444"));
+		this.getDelegate().insert(new Aluno("José",  "5656778"));
+		
+		turmaBC.get().matricularAluno(1L,1L);
+		turmaBC.get().matricularAluno(1L,2L);
+		turmaBC.get().matricularAluno(1L,3L);
+		
 	}
 	
 	
