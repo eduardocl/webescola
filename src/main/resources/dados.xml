@@ -1,0 +1,37 @@
+<turmas>
+ <turma>
+ 	<nome>Portugues</nome>
+ 	<alunos nome="Celia" cpf="12341234124" />
+		<alunos nome="Mauro" cpf="12341234124" />
+ 		<alunos nome="Hélio" cpf="12341234124" />
+ 		<alunos nome="Betina" cpf="12341234124" />
+ 		<alunos nome="Eduardo" cpf="12341234124" />	
+ </turma>
+
+ <turma>
+ 	<nome>Matemática</nome>
+	<alunos nome="Aline" cpf="12341234124" />
+	<alunos nome="Celia" cpf="12341234124" />
+		<alunos nome="Mauro" cpf="12341234124" />
+ 		<alunos nome="Hélio" cpf="12341234124" />
+ 		<alunos nome="Betina" cpf="12341234124" />
+ 		<alunos nome="Eduardo" cpf="12341234124" />
+ 		<alunos nome="João" cpf="12341234124" />
+		<alunos nome="Amilton" cpf="12341234124" />
+ 		<alunos nome="Aline" cpf="12341234124" />
+
+
+ </turma>
+
+ <turma>
+ 	<nome>História</nome>
+
+ 		<alunos nome="João" cpf="12341234124" />
+		<alunos nome="Amilton" cpf="12341234124" />
+ 		<alunos nome="Aline" cpf="12341234124" />
+
+
+ </turma>
+
+ 
+</turmas>
