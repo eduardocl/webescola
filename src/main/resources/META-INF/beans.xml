@@ -7,8 +7,8 @@
 		<class>com.serpro.depae.treinamento.webescola.security.Autenticador</class>
 	</alternatives>
 	
-	<decorators>
-		<class>com.serpro.depae.treinamento.webescola.domain.AlunoDecorator</class>
-	</decorators>
+<!-- 	<decorators> -->
+<!-- 		<class>com.serpro.depae.treinamento.webescola.domain.AlunoDecorator</class> -->
+<!-- 	</decorators> -->
 	
 </beans>
