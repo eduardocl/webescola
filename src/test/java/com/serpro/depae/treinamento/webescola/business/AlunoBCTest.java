@@ -25,7 +25,7 @@ public class AlunoBCTest {
 	
 	@Test
 	public void createAluno() {
-		alunoBC.insert(new Aluno("teste"));
+		alunoBC.insert(new Aluno("teste","1111"));
 	}
 	
 }

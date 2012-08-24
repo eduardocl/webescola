@@ -53,6 +53,8 @@ public class TurmaBCTest {
 	
 	@Test(expected=BusinessException.class)
 	public void turmaComNomeInvalidoFalha() {
+		securityContext.login();
+
 		bc.insert(new Turma());
 	}
 	
@@ -89,8 +91,8 @@ public class TurmaBCTest {
 	
 	@Test
 	public void matricularAlunoComSucesso() {
-		alunoBC.insert(new Aluno("fulano"));
-		alunoBC.insert(new Aluno("fulano"));
+		alunoBC.insert(new Aluno("fulano","111"));
+		alunoBC.insert(new Aluno("fulano", "111"));
 		
 		bc.matricularAluno(bc.findAll().get(0).getId(), 
 				alunoBC.findAll().get(0).getId());

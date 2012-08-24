@@ -1,8 +1,5 @@
 package com.serpro.depae.treinamento.webescola.business;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -12,13 +9,10 @@ import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.message.MessageContext;
 import br.gov.frameworkdemoiselle.message.SeverityType;
-import br.gov.frameworkdemoiselle.report.Report;
-import br.gov.frameworkdemoiselle.report.Type;
-import br.gov.frameworkdemoiselle.report.annotation.Path;
+import br.gov.frameworkdemoiselle.security.RequiredPermission;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.DelegateCrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
-import br.gov.frameworkdemoiselle.util.FileRenderer;
 import br.gov.frameworkdemoiselle.util.ResourceBundle;
 
 import com.serpro.depae.treinamento.webescola.configuration.TurmasConfig;
@@ -57,6 +51,14 @@ public class TurmaBC extends DelegateCrud<Turma, Long, TurmaDAO>{
 		this.insert(new Turma("Português"));
 		this.insert(new Turma("Matemática"));
 		this.insert(new Turma("História"));
+		
+		alunoBC.insert(new Aluno("João",  "1122234"));
+		alunoBC.insert(new Aluno("Maria", "2333444"));
+		alunoBC.insert(new Aluno("José",  "5656778"));
+		
+		this.matricularAluno(1L,1L);
+		this.matricularAluno(1L,2L);
+		this.matricularAluno(1L,3L);
 	}
 	
 //	@Shutdown
@@ -87,7 +89,7 @@ public class TurmaBC extends DelegateCrud<Turma, Long, TurmaDAO>{
 	}
 	
 
-	//@RequiredPermission(resource="disciplina", operation="insert")
+	//@RequiredPermission(resource="turma", operation="insert")
 	@Override
 	public void insert(Turma turma){
 		validate(turma);

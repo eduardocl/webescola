@@ -23,10 +23,10 @@ public class Autorizador implements Authorizer{
 	@Override
 	public boolean hasPermission(String resource, String operation) {
 		System.out.println("resource="+resource + " operation="+operation );
-		if(securityContext.isLoggedIn() == false) {
-			System.out.println("hasPermission... fails");	
-			return false;
-		}
+		//if(securityContext.isLoggedIn() == false) {
+		//	System.out.println("hasPermission... fails");	
+		//	return false;
+		//}
 		return true;
 	}
 

@@ -49,7 +49,13 @@ public class AlunoEditMB extends AbstractEditPageBean<Aluno, Long>{
 	
 	@Override
 	public String insert() {
-		this.bc.insert(getBean());
+		//TODO: verificar por que getBean nao funciona como argumento do insert
+		Aluno a = new Aluno();
+		a.setNome(getBean().getNome());
+		a.setCpf(getBean().getCpf());
+		
+		this.bc.insert(a);
+		//this.bc.insert(getBean());
 		messages.add(InfoMessages.ALUNO_CRIADO_OK, getBean().getNome());
 		return getPreviousView();
 	}

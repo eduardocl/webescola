@@ -19,13 +19,13 @@ public class Autenticador implements Authenticator{
 	
 	@Override
 	public boolean authenticate() {
-		if(credenciais.getSenha().equalsIgnoreCase(credenciais.getLogin())) {
+		//if(credenciais.getSenha().equalsIgnoreCase(credenciais.getLogin())) {
 			System.out.println("usuário autenticado");
 			return true;
-		}
-		credenciais.clear();
-		System.out.println("autenticação falhou");
-		return false;
+		//}
+		//credenciais.clear();
+		//System.out.println("autenticação falhou");
+		//return false;
 	}
 
 	@Override

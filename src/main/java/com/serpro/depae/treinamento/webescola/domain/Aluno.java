@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import br.gov.frameworkdemoiselle.validation.annotation.Cpf;
 
 @Entity
-@XmlRootElement
 public class Aluno {
 
 	@Id

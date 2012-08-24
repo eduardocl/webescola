@@ -6,4 +6,9 @@
 		<class>com.serpro.depae.treinamento.webescola.security.Autorizador</class>
 		<class>com.serpro.depae.treinamento.webescola.security.Autenticador</class>
 	</alternatives>
+	
+	<decorators>
+		<class>com.serpro.depae.treinamento.webescola.domain.AlunoDecorator</class>
+	</decorators>
+	
 </beans>

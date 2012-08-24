@@ -22,19 +22,6 @@ public class AlunoBC extends DelegateCrud<Aluno, Long, AlunoDAO>{
 	@Inject 
 	private Instance<TurmaBC> turmaBC;
 	
-	@Startup
-	public void inserirAlunos() {
-		this.getDelegate().insert(new Aluno("João",  "1122234"));
-		this.getDelegate().insert(new Aluno("Maria", "2333444"));
-		this.getDelegate().insert(new Aluno("José",  "5656778"));
-		
-		turmaBC.get().matricularAluno(1L,1L);
-		turmaBC.get().matricularAluno(1L,2L);
-		turmaBC.get().matricularAluno(1L,3L);
-		
-	}
-	
-	
 	public Aluno findByName(String name) {
 		return this.getDelegate().findByName(name);
 	}

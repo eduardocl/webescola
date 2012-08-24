@@ -1,19 +1,25 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich" 
+	template="/template/main.xhtml">
 
 	<ui:define name="body">
 		<h:form prependId="false" rendered="#{securityContext.loggedIn}">
 			<p:toolbar>
 				<p:toolbarGroup align="left">
 					<p:commandButton value="#{messages['button.save']}" action="#{turmaEditMB.insert}"
-						rendered="#{!bookmarkEditMB.updateMode}" ajax="false" />
+						rendered="#{!turmaEditMB.updateMode}" ajax="false" />
 						
 					<p:commandButton value="#{messages['button.save']}" action="#{turmaEditMB.update}"
-						rendered="#{bookmarkEditMB.updateMode}" ajax="false" />
+						rendered="#{turmaEditMB.updateMode}" ajax="false" />
 						
 					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
-						rendered="#{bookmarkEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+						rendered="#{turmaEditMB.updateMode}" type="button" immediate="true" ajax="false" />
 						
 					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
 						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
@@ -43,6 +49,27 @@
 					<p:message for="nome" />
 				</h:panelGrid>
 			</p:fieldset>
+			
+			
+			
+			
+			<h:selectOneMenu id="lotacao" valueChangeListener="#{turmaEditMB.turma}" 
+			 					value="#{turmaEditMB.bean.id}" >
+			 				 <f:selectItems value="#{turmaEditMB.listOfTurmas}" var="lotacao" 
+			 				 	itemValue="#{lotacao.id}" 
+			 				 	itemLabel="#{lotacao.id}" />
+			 				 		<a4j:ajax event="change"
+			 				 		render="barra teste" execute="barra teste"/>
+			 				</h:selectOneMenu>
+			 				<a4j:status startText="Working..." stopText="Done"  />
+			
+			<a4j:region id="barra">
+			 <h:commandButton value="abrir" rendered="#{turmaEditMB.renderizaBotao}" />
+			</a4j:region>
+			
+			<h:outputText id="teste" value="#{turmaEditMB.renderizaBotao}" />
+			
+			
 		</h:form>
 	</ui:define>
 </ui:composition>
